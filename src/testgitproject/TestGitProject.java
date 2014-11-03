@@ -20,12 +20,15 @@ public class TestGitProject {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        int a, b, c;
+        int a, b;
         Random rand=new Random();
-        a= rand.nextInt();
-        b= rand.nextInt();
+        a= rand.nextInt(100);
+        b= rand.nextInt(100);
+        int c;
+        c=a*b;
         
-        System.out.println("Sum is: " + a+b);
+        System.out.println("Sum is: " + (a+b));
+        System.out.println("Multiple is "+ c);
         
         
         
