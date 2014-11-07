@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package testgitproject;
+package ReceptionSystem;
 
 import java.util.Random;
 
@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author Bushra Sajjad
  */
-public class TestGitProject {
+public class ReceptionSystem {
 
     /**
      * @param args the command line arguments
