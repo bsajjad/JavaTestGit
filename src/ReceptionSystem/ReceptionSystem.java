@@ -6,14 +6,20 @@
 
 package ReceptionSystem;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
  *
- * @author Temperance
+ * @author Melanie
  */
 public class ReceptionSystem extends javax.swing.JFrame {
 
+    Database database = new Database();
+    
     /**
      * Creates new form ReceptionSystem
      */
@@ -42,9 +48,11 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextFieldID = new javax.swing.JTextField();
         jTextFieldProgram = new javax.swing.JTextField();
         jTextFieldBatch = new javax.swing.JTextField();
-        jTextFieldName = new javax.swing.JTextField();
+        jTextFieldFirstname = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldLastname = new javax.swing.JTextField();
         jPanelReport = new javax.swing.JPanel();
         jPanelDB = new javax.swing.JPanel();
 
@@ -67,6 +75,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextArea1.setName("jTextArea1"); // NOI18N
         jScrollPane1.setViewportView(jTextArea1);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Student Photo");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel1.setName("jLabel1"); // NOI18N
@@ -76,7 +85,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jLabel2.setName("jLabel2"); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel3.setText("Name:");
+        jLabel3.setText("Firstname:");
         jLabel3.setName("jLabel3"); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
@@ -99,9 +108,9 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextFieldBatch.setName("jTextFieldBatch"); // NOI18N
         jTextFieldBatch.setEditable(false);
 
-        jTextFieldName.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldName.setName("jTextFieldName"); // NOI18N
-        jTextFieldName.setEditable(false);
+        jTextFieldFirstname.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        jTextFieldFirstname.setName("jTextFieldFirstname"); // NOI18N
+        jTextFieldFirstname.setEditable(false);
 
         jLabel6.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jLabel6.setText("Email:");
@@ -111,65 +120,76 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextFieldEmail.setName("jTextFieldEmail"); // NOI18N
         jTextFieldEmail.setEditable(false);
 
+        jLabel7.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        jLabel7.setText("Lastname:");
+        jLabel7.setName("jLabel7"); // NOI18N
+
+        jTextFieldLastname.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        jTextFieldLastname.setName("jTextFieldLastname"); // NOI18N
+
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldBatch))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldLastname, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                            .addComponent(jTextFieldBatch)
                             .addComponent(jTextFieldProgram)
                             .addComponent(jTextFieldID)
-                            .addComponent(jTextFieldName))))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldFirstname))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldEmail))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextFieldBatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelMainLayout.createSequentialGroup()
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTextFieldFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jTextFieldLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextFieldProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jTextFieldBatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(253, Short.MAX_VALUE))
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Surveillance", jPanelMain);
@@ -220,10 +240,25 @@ public class ReceptionSystem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
             ImageIcon studentPic = new ImageIcon("E:\\Pictures\\Melanie Jiang.jpg");
             jLabel1.setText("");
             jLabel1.setIcon(studentPic);
+            database.init();
+            String studentID = "092";
+            ResultSet result = database.getStudentInfo(studentID);
+            while(result.next()){
+                jTextFieldFirstname.setText(result.getString("firstname"));
+                jTextFieldLastname.setText(result.getString("lastname"));
+                jTextFieldID.setText(result.getString("student_id"));
+                jTextFieldProgram.setText(result.getString("program"));
+                jTextFieldBatch.setText(result.getString("batch"));
+                jTextFieldEmail.setText(result.getString("email"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
@@ -268,6 +303,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelDB;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelReport;
@@ -276,8 +312,9 @@ public class ReceptionSystem extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldBatch;
     private javax.swing.JTextField jTextFieldEmail;
+    private javax.swing.JTextField jTextFieldFirstname;
     private javax.swing.JTextField jTextFieldID;
-    private javax.swing.JTextField jTextFieldName;
+    private javax.swing.JTextField jTextFieldLastname;
     private javax.swing.JTextField jTextFieldProgram;
     // End of variables declaration//GEN-END:variables
 }
