@@ -26,6 +26,11 @@ public class ReceptionSystem extends javax.swing.JFrame {
     public ReceptionSystem() {
         initComponents();
     }
+    
+    public ReceptionSystem(Database db){
+        initComponents();
+        database = db;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,11 +79,12 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
         jButtonSubmit = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        jTextFieldTotalVistis = new javax.swing.JTextField();
+        jTextFieldTotalVisits = new javax.swing.JTextField();
         jPanelReport = new javax.swing.JPanel();
         jPanelDB = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
 
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -91,6 +97,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(204, 204, 204));
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -120,18 +127,22 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jLabel5.setText("Batch:");
         jLabel5.setName("jLabel5"); // NOI18N
 
+        jTextFieldID.setEditable(false);
         jTextFieldID.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldID.setName("jTextFieldID"); // NOI18N
         jTextFieldID.setEditable(false);
 
+        jTextFieldProgram.setEditable(false);
         jTextFieldProgram.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldProgram.setName("jTextFieldProgram"); // NOI18N
         jTextFieldProgram.setEditable(false);
 
+        jTextFieldBatch.setEditable(false);
         jTextFieldBatch.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldBatch.setName("jTextFieldBatch"); // NOI18N
         jTextFieldBatch.setEditable(false);
 
+        jTextFieldFirstname.setEditable(false);
         jTextFieldFirstname.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldFirstname.setName("jTextFieldFirstname"); // NOI18N
         jTextFieldFirstname.setEditable(false);
@@ -140,6 +151,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jLabel6.setText("Email:");
         jLabel6.setName("jLabel6"); // NOI18N
 
+        jTextFieldEmail.setEditable(false);
         jTextFieldEmail.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldEmail.setName("jTextFieldEmail"); // NOI18N
         jTextFieldEmail.setEditable(false);
@@ -148,6 +160,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jLabel7.setText("Lastname:");
         jLabel7.setName("jLabel7"); // NOI18N
 
+        jTextFieldLastname.setEditable(false);
         jTextFieldLastname.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldLastname.setName("jTextFieldLastname"); // NOI18N
 
@@ -159,6 +172,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jLabel9.setText("Date:");
         jLabel9.setName("jLabel9"); // NOI18N
 
+        jTextFieldLastDate.setEditable(false);
         jTextFieldLastDate.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldLastDate.setName("jTextFieldLastDate"); // NOI18N
         jTextFieldLastDate.setEditable(false);
@@ -169,6 +183,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
+        jTextAreaLastReason.setEditable(false);
         jTextAreaLastReason.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaLastReason.setColumns(20);
         jTextAreaLastReason.setFont(new java.awt.Font("宋体", 0, 14));
@@ -177,7 +192,6 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextAreaLastReason.setWrapStyleWord(true);
         jTextAreaLastReason.setBorder(jLabel12.getBorder());
         jTextAreaLastReason.setName("jTextAreaLastReason"); // NOI18N
-        jTextAreaLastReason.setEditable(false);
         jScrollPane2.setViewportView(jTextAreaLastReason);
 
         jLabel11.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
@@ -186,6 +200,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
+        jTextAreaAnnc.setEditable(false);
         jTextAreaAnnc.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaAnnc.setColumns(20);
         jTextAreaAnnc.setLineWrap(true);
@@ -212,6 +227,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
+        jTextAreaReason.setEditable(false);
         jTextAreaReason.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaReason.setColumns(20);
         jTextAreaReason.setLineWrap(true);
@@ -238,13 +254,19 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jButtonSubmit.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jButtonSubmit.setText("Submit");
         jButtonSubmit.setName("jButtonSubmit"); // NOI18N
+        jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitActionPerformed(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jLabel17.setText("Total visits:");
         jLabel17.setName("jLabel17"); // NOI18N
 
-        jTextFieldTotalVistis.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldTotalVistis.setName("jTextFieldTotalVistis"); // NOI18N
+        jTextFieldTotalVisits.setEditable(false);
+        jTextFieldTotalVisits.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        jTextFieldTotalVisits.setName("jTextFieldTotalVisits"); // NOI18N
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -279,12 +301,6 @@ public class ReceptionSystem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTotalVistis, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel8)
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
@@ -314,8 +330,16 @@ public class ReceptionSystem extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldLastDate)))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelMainLayout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldTotalVisits, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel8)
+                            .addGroup(jPanelMainLayout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -355,7 +379,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextFieldTotalVistis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTotalVisits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,7 +409,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -444,12 +468,11 @@ public class ReceptionSystem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        try {
+               try {
             // TODO add your handling code here:
             ImageIcon studentPic = new ImageIcon("E:\\Pictures\\Melanie Jiang.jpg");
             jLabel1.setText("");
             jLabel1.setIcon(studentPic);
-            database.init();
             String studentID = "092";
             ResultSet result = database.getStudentInfo(studentID);
             while(result.next()){
@@ -459,12 +482,23 @@ public class ReceptionSystem extends javax.swing.JFrame {
                 jTextFieldProgram.setText(result.getString("program"));
                 jTextFieldBatch.setText(result.getString("batch"));
                 jTextFieldEmail.setText(result.getString("email"));
+                jTextFieldTotalVisits.setText(result.getString("Total Visits"));
+                jTextFieldLastDate.setText(result.getString("Last Visit").substring(0, 19));
+                
+                ResultSet lastReason = database.getLastVisitReason(result.getString("student_id"), result.getString("Last Visit"));
+                lastReason.first();
+                jTextAreaLastReason.setText(lastReason.getString("Last Reason"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
+        
+    }//GEN-LAST:event_jButtonSubmitActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -496,7 +530,9 @@ public class ReceptionSystem extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ReceptionSystem().setVisible(true);
+
             }
+
         });
     }
 
@@ -541,6 +577,6 @@ public class ReceptionSystem extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldLastDate;
     private javax.swing.JTextField jTextFieldLastname;
     private javax.swing.JTextField jTextFieldProgram;
-    private javax.swing.JTextField jTextFieldTotalVistis;
+    private javax.swing.JTextField jTextFieldTotalVisits;
     // End of variables declaration//GEN-END:variables
 }

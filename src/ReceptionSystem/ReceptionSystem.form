@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -100,13 +101,6 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldTotalVistis" min="-2" pref="170" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -143,9 +137,20 @@
                                   <Component id="jTextFieldLastDate" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" pref="329" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldTotalVisits" min="-2" pref="180" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane3" min="-2" pref="329" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -199,7 +204,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldTotalVistis" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldTotalVisits" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -233,7 +238,7 @@
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -260,6 +265,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextArea1">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
                     </Property>
@@ -320,6 +326,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldID">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -331,6 +338,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldProgram">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -342,6 +350,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldBatch">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -353,6 +362,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldFirstname">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -373,6 +383,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldEmail">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -393,6 +404,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldLastname">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -419,6 +431,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldLastDate">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
@@ -449,6 +462,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextAreaLastReason">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
@@ -464,9 +478,6 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="jTextAreaLastReason" noResource="true"/>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTextAreaLastReason.setEditable(false);"/>
-                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -491,6 +502,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextAreaAnnc">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
@@ -556,6 +568,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="jTextAreaReason">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
@@ -614,6 +627,9 @@
                 <Property name="text" type="java.lang.String" value="Submit"/>
                 <Property name="name" type="java.lang.String" value="jButtonSubmit" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubmitActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -624,12 +640,13 @@
                 <Property name="name" type="java.lang.String" value="jLabel17" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldTotalVistis">
+            <Component class="javax.swing.JTextField" name="jTextFieldTotalVisits">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="&#x5b8b;&#x4f53;" size="14" style="0"/>
                 </Property>
-                <Property name="name" type="java.lang.String" value="jTextFieldTotalVistis" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="jTextFieldTotalVisits" noResource="true"/>
               </Properties>
             </Component>
           </SubComponents>
