@@ -6,24 +6,11 @@
 
 package ReceptionSystem;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.highgui.Highgui;
-import org.opencv.highgui.VideoCapture;
 
 /**
  *
@@ -56,6 +43,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelMain = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -91,41 +80,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jButtonSubmit = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jTextFieldTotalVisits = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
         jPanelReport = new javax.swing.JPanel();
         jPanelDB = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jPanel3 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jTextFieldFirstname1 = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jTextFieldLastname1 = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        jTextFieldID1 = new javax.swing.JTextField();
-        jTextFieldProgram1 = new javax.swing.JTextField();
-        jTextFieldBatch1 = new javax.swing.JTextField();
-        jTextFieldEmail1 = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -138,6 +94,16 @@ public class ReceptionSystem extends javax.swing.JFrame {
         });
 
         jPanelMain.setName("jPanelMain"); // NOI18N
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(204, 204, 204));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Placeholder for video");
+        jTextArea1.setName("jTextArea1"); // NOI18N
+        jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -218,6 +184,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
         jTextAreaLastReason.setEditable(false);
+        jTextAreaLastReason.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaLastReason.setColumns(20);
         jTextAreaLastReason.setFont(new java.awt.Font("宋体", 0, 14));
         jTextAreaLastReason.setLineWrap(true);
@@ -234,6 +201,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
         jTextAreaAnnc.setEditable(false);
+        jTextAreaAnnc.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaAnnc.setColumns(20);
         jTextAreaAnnc.setLineWrap(true);
         jTextAreaAnnc.setRows(3);
@@ -260,6 +228,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
         jTextAreaReason.setEditable(false);
+        jTextAreaReason.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaReason.setColumns(20);
         jTextAreaReason.setLineWrap(true);
         jTextAreaReason.setRows(3);
@@ -299,34 +268,12 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextFieldTotalVisits.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jTextFieldTotalVisits.setName("jTextFieldTotalVisits"); // NOI18N
 
-        jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jPanel2AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,17 +288,16 @@ public class ReceptionSystem extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel12)
                                 .addGroup(jPanelMainLayout.createSequentialGroup()
                                     .addGap(10, 10, 10)
-                                    .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel13)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel15))))
-                                .addComponent(jComboBoxPersonVisited, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jLabel13))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15)))
+                            .addComponent(jComboBoxPersonVisited, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
@@ -400,9 +346,10 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelMainLayout.createSequentialGroup()
                                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -428,9 +375,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jTextFieldTotalVisits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,283 +437,15 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jPanelDB.setName("jPanelDB"); // NOI18N
 
-        jPanel1.setName("jPanel1"); // NOI18N
-
-        jRadioButton1.setText("Student");
-        jRadioButton1.setName("dbRadioButtonStu"); // NOI18N
-        jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jRadioButton1StateChanged(evt);
-            }
-        });
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton1MouseClicked(evt);
-            }
-        });
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton2.setText("Staff");
-        jRadioButton2.setName("jRadioButton2"); // NOI18N
-
-        jRadioButton3.setText("Announcement");
-        jRadioButton3.setName("jRadioButton3"); // NOI18N
-
-        jRadioButton4.setText("Visit Categoty");
-        jRadioButton4.setToolTipText("");
-        jRadioButton4.setName("jRadioButton4"); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2))
-                .addGap(21, 21, 21))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jRadioButton1)
-                .addGap(46, 46, 46)
-                .addComponent(jRadioButton2)
-                .addGap(48, 48, 48)
-                .addComponent(jRadioButton3)
-                .addGap(45, 45, 45)
-                .addComponent(jRadioButton4)
-                .addContainerGap(77, Short.MAX_VALUE))
-        );
-
-        jPanel3.setName("dbPanel1"); // NOI18N
-
-        jToggleButton1.setText("Add New");
-        jToggleButton1.setName("dbToggleButtonAdd"); // NOI18N
-        jToggleButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jToggleButton1MouseClicked(evt);
-            }
-        });
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton2.setText("Update");
-        jToggleButton2.setName("jToggleButton2"); // NOI18N
-        jToggleButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jToggleButton2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jToggleButton1)
-                .addGap(89, 89, 89)
-                .addComponent(jToggleButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jToggleButton1))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        jPanel4.setName("jPanel4"); // NOI18N
-
-        jLabel16.setText("Search ID: ");
-        jLabel16.setName("jLabel16"); // NOI18N
-
-        jScrollPane5.setName("jScrollPane5"); // NOI18N
-
-        jTextPane1.setName("jTextPane1"); // NOI18N
-        jScrollPane5.setViewportView(jTextPane1);
-
-        jButton1.setText("cancel");
-        jButton1.setName("jButton1"); // NOI18N
-
-        jButton2.setText("OK");
-        jButton2.setName("jButton2"); // NOI18N
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
-        jCheckBox2.setText("Delete Profile");
-        jCheckBox2.setName("jCheckBox2"); // NOI18N
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCheckBox2)
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel16)
-                        .addGap(13, 13, 13)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jCheckBox2))
-                .addContainerGap())
-        );
-
-        jPanel5.setName("jPanel5"); // NOI18N
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel22.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel22.setText("Firstname:");
-        jLabel22.setName("jLabel22"); // NOI18N
-        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 20, -1, -1));
-
-        jTextFieldFirstname1.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldFirstname1.setName("jTextFieldFirstname1"); // NOI18N
-        jTextFieldFirstname.setEditable(false);
-        jPanel5.add(jTextFieldFirstname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 14, 186, -1));
-
-        jLabel25.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel25.setText("Lastname:");
-        jLabel25.setName("jLabel25"); // NOI18N
-        jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 61, -1, -1));
-
-        jTextFieldLastname1.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldLastname1.setName("jTextFieldLastname1"); // NOI18N
-        jPanel5.add(jTextFieldLastname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 55, 186, -1));
-
-        jLabel26.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel26.setText("ID:");
-        jLabel26.setName("jLabel26"); // NOI18N
-        jPanel5.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 102, -1, -1));
-
-        jTextFieldID1.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldID1.setName("jTextFieldID1"); // NOI18N
-        jTextFieldID.setEditable(false);
-        jPanel5.add(jTextFieldID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 96, 186, -1));
-
-        jTextFieldProgram1.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldProgram1.setName("jTextFieldProgram1"); // NOI18N
-        jTextFieldProgram.setEditable(false);
-        jPanel5.add(jTextFieldProgram1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 137, 186, -1));
-
-        jTextFieldBatch1.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldBatch1.setName("jTextFieldBatch1"); // NOI18N
-        jTextFieldBatch.setEditable(false);
-        jPanel5.add(jTextFieldBatch1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 178, 186, -1));
-
-        jTextFieldEmail1.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jTextFieldEmail1.setName("jTextFieldEmail1"); // NOI18N
-        jTextFieldEmail.setEditable(false);
-        jPanel5.add(jTextFieldEmail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 219, 332, -1));
-
-        jLabel27.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel27.setText("Email:");
-        jLabel27.setName("jLabel27"); // NOI18N
-        jPanel5.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 225, -1, -1));
-
-        jLabel28.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel28.setText("Batch:");
-        jLabel28.setName("jLabel28"); // NOI18N
-        jPanel5.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 184, -1, -1));
-
-        jLabel29.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel29.setText("Program:");
-        jLabel29.setName("jLabel29"); // NOI18N
-        jPanel5.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 143, -1, -1));
-
-        jLabel30.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("Student Photo");
-        jLabel30.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel30.setName("jLabel30"); // NOI18N
-        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 65, 128, 150));
-
-        jLabel31.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setText("Student Photo");
-        jLabel31.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel31.setName("jLabel31"); // NOI18N
-        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 110, 130));
-
-        jButton3.setLabel("Submit");
-        jButton3.setName("jButton3"); // NOI18N
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-        jPanel5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
-
-        jButton4.setText("Cancel");
-        jButton4.setName("jButton4"); // NOI18N
-        jPanel5.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
-
         javax.swing.GroupLayout jPanelDBLayout = new javax.swing.GroupLayout(jPanelDB);
         jPanelDB.setLayout(jPanelDBLayout);
         jPanelDBLayout.setHorizontalGroup(
             jPanelDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDBLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanelDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 783, Short.MAX_VALUE)
         );
         jPanelDBLayout.setVerticalGroup(
             jPanelDBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelDBLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanelDBLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+            .addGap(0, 498, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Database Management", jPanelDB);
@@ -820,79 +498,6 @@ public class ReceptionSystem extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
-    private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
-        // TODO add your handling code here:
-        jPanel3.show();
-    }//GEN-LAST:event_jRadioButton1StateChanged
-
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1MouseClicked
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-    private void jToggleButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton1MouseClicked
-        // TODO add your handling code here:
-        jPanelDB.add(jPanel5);
-    }//GEN-LAST:event_jToggleButton1MouseClicked
-
-    private void jToggleButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton2MouseClicked
-        // TODO add your handling code here:
-        jPanelDB.add(jPanel4);
-    }//GEN-LAST:event_jToggleButton2MouseClicked
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-        
-        database.init();
-        try {
-            ResultSet result = database.SearchID(jTextPane1.getText());
-       
-            jPanelDB.add(jPanel5);
-        
-            while(result.next()){
-                jTextFieldFirstname1.setText(result.getString("firstname"));
-                jTextFieldLastname1.setText(result.getString("lastname"));
-                jTextFieldID1.setText(result.getString("student_id"));
-                jTextFieldProgram1.setText(result.getString("program"));
-                jTextFieldBatch1.setText(result.getString("batch"));
-                jTextFieldEmail1.setText(result.getString("email"));
-                
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-        
-        database.init();
-        if(jTextFieldFirstname1.getText().isEmpty()||jTextFieldLastname1.getText().isEmpty()||jTextFieldID1.getText().isEmpty()||jTextFieldProgram1.getText().isEmpty()||jTextFieldBatch1.getText().isEmpty()||jTextFieldEmail1.getText().isEmpty()){
-            System.out.println("Please fill in all the information!");
-        }
-        else{
-            try {
-                database.addStudentInfo(jTextFieldID1.getText(), jTextFieldFirstname1.getText(),jTextFieldLastname1.getText() , jTextFieldProgram1.getText(), jTextFieldBatch1.getText(), jTextFieldEmail1.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-            
-    }//GEN-LAST:event_jButton3MouseClicked
-
-    private void jPanel2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel2AncestorAdded
-        // TODO add your handling code here:
-         
-
-    }//GEN-LAST:event_jPanel2AncestorAdded
-
     
     /**
      * @param args the command line arguments
@@ -931,113 +536,10 @@ public class ReceptionSystem extends javax.swing.JFrame {
         });
     }
 
-    public class Camcap extends JPanel{
-        private DaemonThread myThread = null;
-        int count = 0;
-        VideoCapture webSource = null;
-
-        Mat frame = new Mat();
-        MatOfByte mem = new MatOfByte();
-
-        String File_path="";
-
-        class DaemonThread implements Runnable{
-            protected volatile boolean runnable = false;
-
-            @Override
-            public void run() {
-                synchronized(this)
-        {
-            while(runnable)
-            {
-                if(webSource.grab())
-                {
-		    	try
-                        {
-                            webSource.retrieve(frame);
-			    Highgui.imencode(".bmp", frame, mem);
-			    Image im = ImageIO.read(new ByteArrayInputStream(mem.toArray()));
-
-			    BufferedImage buff = (BufferedImage) im;
-			    Graphics g=jPanel1.getGraphics();
-
-			    if (g.drawImage(buff, 0, 0, getWidth(), getHeight() -150 , 0, 0, buff.getWidth(), buff.getHeight(), null))
-			    
-			    if(runnable == false)
-                            {
-			    	System.out.println("Going to wait()");
-			    	this.wait();
-			    }
-			 }
-			 catch(Exception ex)
-                         {
-			    System.out.println("Error");
-                         }
-                }
-            }
-        }
-     }
-   
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        public void OpenCam(){
-        //open webcam
-            webSource =new VideoCapture(File_path);
-            myThread = new DaemonThread();
-            Thread t = new Thread(myThread);
-            t.setDaemon(true);
-            myThread.runnable = true;
-            t.start();
-        }
-        
-        public void TakePic(){
-            myThread.runnable = false;
-            Highgui.imwrite("camera.jpg", frame);
-    	    System.out.println("OK");
-            webSource.release();
-        }
-        
-        public void RunCam(){
-            System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-            //System.loadLibrary("OpenCV");
-            java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                //Camcap.setDefaultLookAndFeelDecorated(true);
-                try
-                {
-                        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-                }
-                catch (Exception ex)
-                {
-                        System.out.println("Failed loading L&F: ");
-                        System.out.println(ex);
-                        System.out.println("Loading default Look & Feel Manager!");
-                }
-
-                new Camcap().setVisible(true);
-            }
-        });
-        }
-        }
-    
-    /**
-     *
-     */
-   
-    
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox jComboBoxCategory;
     private javax.swing.JComboBox jComboBoxPersonVisited;
     private javax.swing.JLabel jLabel1;
@@ -1047,60 +549,34 @@ public class ReceptionSystem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelDB;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelReport;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextAreaAnnc;
     private javax.swing.JTextArea jTextAreaLastReason;
     private javax.swing.JTextArea jTextAreaReason;
     private javax.swing.JTextField jTextFieldBatch;
-    private javax.swing.JTextField jTextFieldBatch1;
     private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldEmail1;
     private javax.swing.JTextField jTextFieldFirstname;
-    private javax.swing.JTextField jTextFieldFirstname1;
     private javax.swing.JTextField jTextFieldID;
-    private javax.swing.JTextField jTextFieldID1;
     private javax.swing.JTextField jTextFieldLastDate;
     private javax.swing.JTextField jTextFieldLastname;
-    private javax.swing.JTextField jTextFieldLastname1;
     private javax.swing.JTextField jTextFieldProgram;
-    private javax.swing.JTextField jTextFieldProgram1;
     private javax.swing.JTextField jTextFieldTotalVisits;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }

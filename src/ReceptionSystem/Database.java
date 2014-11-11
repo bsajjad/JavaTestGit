@@ -26,7 +26,7 @@ public class Database {
 
     //change this into your own username & password
     private static final String DBUSERNAME = "root";
-    private static final String DBPASSWORD = "";
+    private static final String DBPASSWORD = "82465";
 
     /**
      * Creates a new instance of DBConnection
@@ -95,25 +95,6 @@ public class Database {
         return password;
     }
 
-    public void addStudentInfo(String ID,String fname,String lname,String Pro,String Batch,String email) throws SQLException {
-        Statement statement = connection.createStatement();
-            statement.executeUpdate(
-                    "INSERT INTO receptionsys.student (student_ID,firstname, lastname,program, batch, email)\n"
-                    + "VALUES ('" + ID + "','" + fname + "','" +lname+"','"+Pro+"','"+Batch+"','"+ email + "');\n");
-            statement.close();
-            
-                
-    }
-    
-      public ResultSet SearchID (String id){
-          return sqlQuery(
-                    "SELECT * \n"
-                            + "FROM student\n"
-                            + "WHERE student_id = '" + id    + "';\n");
-           
-        
-       
-    }
     //following were used to randomize visit data in database
     /*public void randomVisitData() throws SQLException {
         ResultSet categories = sqlQuery("SELECT category_id FROM reasoncategory;\n");
