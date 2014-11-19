@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.opencv.core.Core;
 
 /**
  *
@@ -102,10 +103,12 @@ public class Login extends javax.swing.JDialog {
         try {
             // TODO add your handling code here:
             database.init();
+            System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
             ReceptionSystem sys = new ReceptionSystem(database);
+            CamCap cam = new CamCap(database);
             if(!jPasswordField.getText().isEmpty() && jPasswordField.getText().equals(database.login(jTextFieldUsername.getText()))){
                 this.setVisible(false);
-                sys.setVisible(true);
+                cam.setVisible(true);
             }
             else{
                 jLabelCheck.setText("Username or password not corrent.");
@@ -119,15 +122,17 @@ public class Login extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             try {
-            // TODO add your handling code here:
+            //TODO add your handling code here:
             database.init();
             ReceptionSystem sys = new ReceptionSystem(database);
+            System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+            CamCap cam = new CamCap(database);
             if(!jPasswordField.getText().isEmpty() && jPasswordField.getText().equals(database.login(jTextFieldUsername.getText()))){
                 this.setVisible(false);
-                sys.setVisible(true);
+                cam.setVisible(true);
             }
             else{
-                jLabelCheck.setText("Username or password not corrent.");
+               jLabelCheck.setText("Username or password not corrent.");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -174,6 +179,24 @@ public class Login extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+    
+    private static class RunnableImpl implements Runnable {
+
+        public RunnableImpl() {
+        }
+
+        @Override
+        public void run() {
+            Login dialog = new Login(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
