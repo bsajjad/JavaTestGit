@@ -23,6 +23,7 @@ import static com.googlecode.javacv.cpp.opencv_legacy.*;
 
 //import static com.googlecode.javacv.cpp.opencv_legacy.cvEigenDecomposite;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -136,7 +137,7 @@ public class Recognition {
    *
    * @param szFileTest the index file of test images
    */
-  public int recognizeFileList(final String szFileTest) {
+  public String recognizeFileList(final String szFileTest) throws FileNotFoundException, IOException {
     LOGGER.info("===========================================");
     LOGGER.info("recognizing faces indexed from " + szFileTest);
     int i = 0;
@@ -150,6 +151,7 @@ public class Recognition {
     double tallyFaceRecognizeTime;
     float confidence = 0.0f;
     int nearest = 0;
+    String name = "unknown";
     // load test images and ground truth for person number
     testFaceImgArr = loadFaceImgArray(szFileTest);
     nTestFaces = testFaceImgArr.length;
@@ -205,8 +207,47 @@ public class Recognition {
     }
     System.out.println("nearest " + nearest);
     
+    
+    BufferedReader imgListFile = new BufferedReader(new FileReader("data/training.txt"));
+    int nFaces = 0;
+    while (true) {
+        final String line = imgListFile.readLine();
+        if (line == null || line.isEmpty()) {
+          break;
+        }
+        nFaces++;
+      }
+    
+    imgListFile = new BufferedReader(new FileReader("data/training.txt"));
+    ArrayList<String> names = new ArrayList<String>();
+    for (int iFace = 0; iFace < nFaces; iFace++) {
+        String personName;
+        //String sPersonName;
+        //int personNumber;
+
+        // read person number (beginning with 1), their name and the image filename.
+        final String line = imgListFile.readLine();
+        if (line.isEmpty()) {
+          break;
+        }
+        final String[] tokens = line.split(" ");
+        //personNumber = Integer.parseInt(tokens[0]);
+        personName = tokens[1];
+        names.add(personName);
+        //sPersonName = personName;
+        //LOGGER.info("Got " + iFace + " " + personNumber + " " + personName + " " + imgFilename);
+
+        // Check if a new person is being loaded.
+//        if (personNumber > nPersons) {
+//          // Allocate memory for the extra person (or possibly multiple), using this new person's name.
+//          personNames.add(sPersonName);
+//          nPersons = personNumber;
+//          //LOGGER.info("Got new person " + sPersonName + " -> nPersons = " + nPersons + " [" + personNames.size() + "]");
   }
-    return nearest;
+    //System.out.println(names.get(iNearest));
+    name = names.get(iNearest);
+  } 
+    return name;
   }
 
   /** Reads the names & image filenames of people from a text file, and loads all those images listed.
@@ -766,13 +807,14 @@ public class Recognition {
    *
    * @param args the command line arguments
    */
-  public void recognize() {
-
+  public String recognize() throws IOException {
+    String studentid = "";
     //final Recognition faceRecognition = new Recognition();
     //faceRecognition.learn("some-training-faces.txt");
     this.learn("data/training.txt");
     //faceRecognition.recognizeFileList("some-test-faces.txt");
-    this.recognizeFileList("data/test.txt");
+    studentid = this.recognizeFileList("data/test.txt");
+    return studentid;
   }
   
   

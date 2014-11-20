@@ -119,6 +119,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import javax.imageio.ImageIO;
@@ -140,6 +142,7 @@ import org.opencv.highgui.VideoCapture;
 public class CamCap extends javax.swing.JFrame
 {
     Database database;
+    int haha = 0;
     //ReceptionSystem sys;
     
     private DaemonThread myThread = null;
@@ -199,7 +202,7 @@ public class CamCap extends javax.swing.JFrame
     public CamCap(Database db) {
         initComponents();
         database = db;
-        
+        haha = 0;
     }
     
 //    public CamCap(Database db, ReceptionSystem sys) {
@@ -236,6 +239,10 @@ public class CamCap extends javax.swing.JFrame
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+//      
         });
 
         jButton1.setFont(new java.awt.Font("Cambria", 0, 18));
@@ -257,6 +264,11 @@ public class CamCap extends javax.swing.JFrame
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(320, 240));
+//        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+//            public void focusGained(java.awt.event.FocusEvent evt) {
+//                jPanel1FocusGained(evt);
+//            }
+//        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -347,7 +359,9 @@ public class CamCap extends javax.swing.JFrame
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
+        
+        
+        
         pack();
 //        Dimension dimentsion  = Toolkit.getDefaultToolkit().getScreenSize();
 //        int x = (int) ((dimentsion.getWidth() - this.getWidth()) / 2);
@@ -371,13 +385,29 @@ public class CamCap extends javax.swing.JFrame
             t.setDaemon(true);
             myThread.runnable = true;
             t.start();
-
+            haha = 1;
             jButton1.setEnabled(false);
             jButton2.setEnabled(true);
             //jComboBox1.setEnabled(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void startVideo(){
+        webSource =new VideoCapture(0);
+            //}
+//            else
+//                webSource =new VideoCapture(File_path);
+//            
+            myThread = new DaemonThread();
+            Thread t = new Thread(myThread);
+            t.setDaemon(true);
+            myThread.runnable = true;
+            t.start();
+            
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(true);
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if ( (jButton2.getText()).equals("Stop") )
@@ -390,9 +420,10 @@ public class CamCap extends javax.swing.JFrame
     	    System.out.println("OK");
             //webSource.release();
             //this.setVisible(false);
+            if(haha == 0){
             ReceptionSystem sys = new ReceptionSystem(database);
             sys.setVisible(true);
-           
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -443,6 +474,12 @@ public class CamCap extends javax.swing.JFrame
               }
     }//GEN-LAST:event_formWindowClosing
 
+    private void jPanel1FocusGained(java.awt.event.WindowEvent evt) {                                         
+        // TODO add your handling code here:
+         //System.out.println("^%*#&$#@!%^&*%$#@!#$%^&*(^%$#@!#$%^&*()&^%$#@!$%^&*()&^%$#@!$%^&*(&^%$#@!#$%^&*(^%$#@");
+         startVideo();
+    }    
+    
     /**
     * @param args the command line arguments
     */

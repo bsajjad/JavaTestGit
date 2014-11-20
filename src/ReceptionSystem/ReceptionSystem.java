@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ReceptionSystem;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import org.opencv.core.Core;
@@ -35,15 +36,15 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
     Database database;
     //CamCap cam;
-    
+
     /**
      * Creates new form ReceptionSystem
      */
     public ReceptionSystem() {
         initComponents();
     }
-    
-    public ReceptionSystem(Database db){
+
+    public ReceptionSystem(Database db) {
         initComponents();
         database = db;
         //this.cam = cam;
@@ -95,8 +96,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jButtonSubmit = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jTextFieldTotalVisits = new javax.swing.JTextField();
-        jPanelCam = new javax.swing.JPanel();
-        jButtonCam = new javax.swing.JButton();
+        jPanelCam = new ImagePanel();
+        jLabelSubmitted = new javax.swing.JLabel();
         jPanelReport = new javax.swing.JPanel();
         jPanelDB = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -133,9 +134,18 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+        jTabbedPane1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTabbedPane1FocusGained(evt);
+            }
+        });
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseClicked(evt);
@@ -264,7 +274,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
-        jTextAreaReason.setEditable(false);
+        jTextAreaReason.setEditable(true);
         jTextAreaReason.setColumns(20);
         jTextAreaReason.setLineWrap(true);
         jTextAreaReason.setRows(3);
@@ -305,6 +315,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
         jTextFieldTotalVisits.setName("jTextFieldTotalVisits"); // NOI18N
 
         jPanelCam.setName("jPanelCam"); // NOI18N
+        Graphics g=jPanelCam.getGraphics();
+        jPanelCam.paintComponents(g);
         jPanelCam.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -326,13 +338,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
             .addGap(0, 252, Short.MAX_VALUE)
         );
 
-        jButtonCam.setText("Camera");
-        jButtonCam.setName("jButtonCam"); // NOI18N
-        jButtonCam.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonCamMouseClicked(evt);
-            }
-        });
+        jLabelSubmitted.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabelSubmitted.setName("jLabelSubmitted"); // NOI18N
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -353,24 +360,35 @@ public class ReceptionSystem extends javax.swing.JFrame {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelMainLayout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel13)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel14)
-                                            .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel15))))
-                                .addComponent(jComboBoxPersonVisited, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelMainLayout.createSequentialGroup()
+                                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel13)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel14)
+                                                .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel15))))
+                                    .addComponent(jComboBoxPersonVisited, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanelCam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelMainLayout.createSequentialGroup()
                                 .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonCam)
-                                .addGap(26, 26, 26)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelMainLayout.createSequentialGroup()
+                            .addComponent(jLabel17)
+                            .addGap(23, 23, 23)
+                            .addComponent(jTextFieldTotalVisits, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel8)
+                        .addGroup(jPanelMainLayout.createSequentialGroup()
+                            .addGap(95, 95, 95)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelSubmitted, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -399,19 +417,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldLastDate, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)))
-                    .addGroup(jPanelMainLayout.createSequentialGroup()
-                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelMainLayout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(23, 23, 23)
-                                .addComponent(jTextFieldTotalVisits, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel8)
-                            .addGroup(jPanelMainLayout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jTextFieldLastDate, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -451,8 +457,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jTextFieldTotalVisits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jButtonCam))
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
@@ -486,7 +491,8 @@ public class ReceptionSystem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonSubmit))
+                    .addComponent(jButtonSubmit)
+                    .addComponent(jLabelSubmitted, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -807,15 +813,49 @@ public class ReceptionSystem extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public class ImagePanel extends JPanel {
+
+        private BufferedImage image;
+
+        public ImagePanel() {
+            try {
+                image = ImageIO.read(new File("camera.jpg"));
+            } catch (IOException ex) {
+                // handle exception...
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null); // see javadoc for more info on the parameters            
+        }
+
+    }
+
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-               try {
+        //onSet();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void onSet() throws IOException {
+        try {
             // TODO add your handling code here:
-            ImageIcon studentPic = new ImageIcon("E:\\Pictures\\Melanie Jiang.jpg");
-            jLabel1.setText("");
-            jLabel1.setIcon(studentPic);
-            String studentID = "092";
+
+            String studentid = "";
+            //recognize face
+            FaceDetection face = new FaceDetection();
+            try {
+                face.detectFace();
+            } catch (IOException ex) {
+                Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Recognition rec = new Recognition();
+            studentid = rec.recognize();
+
+            //set all fields with values
+            String studentID = studentid;
             ResultSet result = database.getStudentInfo(studentID);
-            while(result.next()){
+            while (result.next()) {
                 jTextFieldFirstname.setText(result.getString("firstname"));
                 jTextFieldLastname.setText(result.getString("lastname"));
                 jTextFieldID.setText(result.getString("student_id"));
@@ -823,40 +863,39 @@ public class ReceptionSystem extends javax.swing.JFrame {
                 jTextFieldBatch.setText(result.getString("batch"));
                 jTextFieldEmail.setText(result.getString("email"));
                 jTextFieldTotalVisits.setText(result.getString("Total Visits"));
-                jTextFieldLastDate.setText(result.getString("Last Visit").substring(0, 19));
-                
-                ResultSet lastReason = database.getLastVisitReason(result.getString("student_id"), result.getString("Last Visit"));
-                lastReason.first();
-                jTextAreaLastReason.setText(lastReason.getString("Last Reason"));
+                if (!result.getString("Total Visits").equals("0")) {
+                    jTextFieldLastDate.setText(result.getString("Last Visit").substring(0, 19));
+                    ResultSet lastReason = database.getLastVisitReason(result.getString("student_id"), result.getString("Last Visit"));
+                    lastReason.first();
+                    jTextAreaLastReason.setText(lastReason.getString("Last Reason"));
+                }
+                String photopath = result.getString("photopath");
+                System.out.println(photopath);
+                //jLabel1.setText(result.getString("photopath"));
+                //ImageIcon studentPic = new ImageIcon(result.getString("photopath"));
+                ImageIcon studentPic = new ImageIcon(photopath);//"training/yiminj.JPG"
+                jLabel1.setIcon(studentPic);
+//                ResultSet lastReason = database.getLastVisitReason(result.getString("student_id"), result.getString("Last Visit"));
+//                lastReason.first();
+//                jTextAreaLastReason.setText(lastReason.getString("Last Reason"));
+                ArrayList<String> categories = database.getAllReasonCategoryName();
+                for (int i = 0; i < categories.size(); i++) {
+                    jComboBoxCategory.addItem(categories.get(i));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //display image on main window
-        BufferedImage image;        
-            try {
-                image = ImageIO.read(new File("camera.jpg"));
-                Graphics g=jPanelCam.getGraphics();
-                g.drawImage(image, 0, 0, jPanelCam.getWidth(), jPanelCam.getHeight(), null);
-                //g.drawImage(image, 0, 0, null);
-            } catch (IOException ex) {
-                Logger.getLogger(CamCap.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        //generate right sized picture
-        FaceDetection face = new FaceDetection();
-        try {
-            face.detectFace();
-        }
-        catch (IOException ex) {
-            Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Recognition rec = new Recognition();
-        rec.recognize();
-        
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    }
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        
+        try {
+            database.addVisit(jTextFieldID.getText(), (String) jComboBoxCategory.getSelectedItem(), jTextAreaReason.getText());
+            jLabelSubmitted.setText("Visit added successfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
@@ -888,21 +927,21 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        
+
         database.init();
         try {
             ResultSet result = database.SearchID(jTextPane1.getText());
-       
+
             jPanelDB.add(jPanel5);
-        
-            while(result.next()){
+
+            while (result.next()) {
                 jTextFieldFirstname1.setText(result.getString("firstname"));
                 jTextFieldLastname1.setText(result.getString("lastname"));
                 jTextFieldID1.setText(result.getString("student_id"));
                 jTextFieldProgram1.setText(result.getString("program"));
                 jTextFieldBatch1.setText(result.getString("batch"));
                 jTextFieldEmail1.setText(result.getString("email"));
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
@@ -911,19 +950,18 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-        
+
         database.init();
-        if(jTextFieldFirstname1.getText().isEmpty()||jTextFieldLastname1.getText().isEmpty()||jTextFieldID1.getText().isEmpty()||jTextFieldProgram1.getText().isEmpty()||jTextFieldBatch1.getText().isEmpty()||jTextFieldEmail1.getText().isEmpty()){
+        if (jTextFieldFirstname1.getText().isEmpty() || jTextFieldLastname1.getText().isEmpty() || jTextFieldID1.getText().isEmpty() || jTextFieldProgram1.getText().isEmpty() || jTextFieldBatch1.getText().isEmpty() || jTextFieldEmail1.getText().isEmpty()) {
             System.out.println("Please fill in all the information!");
-        }
-        else{
+        } else {
             try {
-                database.addStudentInfo(jTextFieldID1.getText(), jTextFieldFirstname1.getText(),jTextFieldLastname1.getText() , jTextFieldProgram1.getText(), jTextFieldBatch1.getText(), jTextFieldEmail1.getText());
+                database.addStudentInfo(jTextFieldID1.getText(), jTextFieldFirstname1.getText(), jTextFieldLastname1.getText(), jTextFieldProgram1.getText(), jTextFieldBatch1.getText(), jTextFieldEmail1.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-            
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jPanelCamAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanelCamAncestorAdded
@@ -931,14 +969,21 @@ public class ReceptionSystem extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanelCamAncestorAdded
 
-    private void jButtonCamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCamMouseClicked
+    private void jTabbedPane1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane1FocusGained
         // TODO add your handling code here:
-        //CamCap cam = new CamCap(database, this);
-        //this.setVisible(false);
-        //cam.setVisible(true);
-    }//GEN-LAST:event_jButtonCamMouseClicked
+        //System.out.println("^%*#&$#@!%^&*%$#@!#$%^&*(^%$#@!#$%^&*()&^%$#@!$%^&*()&^%$#@!$%^&*(&^%$#@!#$%^&*(^%$#@");
+    }//GEN-LAST:event_jTabbedPane1FocusGained
 
-    
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+        try {
+            // TODO add your handling code here:
+            onSet();
+        } catch (IOException ex) {
+            Logger.getLogger(ReceptionSystem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -976,22 +1021,15 @@ public class ReceptionSystem extends javax.swing.JFrame {
         });
     }
 
-    
-    
     /**
      *
      */
-   
-    
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButtonCam;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JCheckBox jCheckBox1;
@@ -1023,6 +1061,7 @@ public class ReceptionSystem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelSubmitted;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

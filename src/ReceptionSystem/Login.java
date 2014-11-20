@@ -103,6 +103,7 @@ public class Login extends javax.swing.JDialog {
         try {
             // TODO add your handling code here:
             database.init();
+            //database.randomVisitData();
             System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
             ReceptionSystem sys = new ReceptionSystem(database);
             CamCap cam = new CamCap(database);
